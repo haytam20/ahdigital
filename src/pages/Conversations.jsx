@@ -64,11 +64,9 @@ const Conversations = () => {
         </div>
       </div>
       
-      {/* Content area that changes based on main tab */}
       <div className="flex flex-1 overflow-hidden">
         {activeMainTab === 'Conversations' && (
           <div className="flex w-full h-full">
-            {/* Left sidebar for conversations - fixed width */}
             <div className="w-80 flex-shrink-0 border-r border-gray-200 flex flex-col overflow-hidden">
               {/* Sub navigation */}
               <div className="border-b border-gray-200 flex-shrink-0">
@@ -121,7 +119,6 @@ const Conversations = () => {
                 </div>
               </div>
               
-              {/* Conversation list - empty state */}
               <div className="flex-1 overflow-y-auto">
                 <div className="h-full flex items-center justify-center">
                   <div className="text-center">
@@ -140,7 +137,7 @@ const Conversations = () => {
               </div>
             </div>
             
-            {/* Right content area - takes remaining width */}
+          
             <div className="flex-1 bg-gray-50 flex flex-col overflow-hidden">
               <div className="flex-1 flex items-center justify-center">
                 <div className="text-center">
@@ -162,11 +159,11 @@ const Conversations = () => {
         
         {activeMainTab === 'Manual Actions' && (
           <div className="w-full h-full bg-gray-50 flex flex-col">
-            {/* Manual Actions header - now with inline controls */}
+           
             <div className="bg-white px-6 py-4 border-b border-gray-200 flex items-center justify-between">
               <h2 className="text-xl font-medium text-gray-800">Manual Actions</h2>
               
-              {/* Filter controls inline */}
+              {/* Filter controls */}
               <div className="flex items-center gap-4">
                 <div className="w-64">
                   <div className="relative">
@@ -210,7 +207,7 @@ const Conversations = () => {
               </div>
             </div>
             
-            {/* Manual Actions content - empty state */}
+            {/* Manual Actions content*/}
             <div className="flex-1 flex items-center justify-center p-8">
               <div className="text-center max-w-md">
                 <div className="w-16 h-16 mx-auto bg-green-50 rounded-full flex items-center justify-center mb-4">
@@ -240,7 +237,7 @@ const Conversations = () => {
         
         {activeMainTab === 'Snippets' && (
           <div className="w-full h-full bg-gray-50 flex flex-col">
-            {/* Snippets header with buttons on the same line */}
+            
             <div className="bg-gray-50 px-6 py-6 flex justify-between items-start">
               <div>
                 <h2 className="text-2xl font-medium text-gray-800">Snippets</h2>
@@ -249,7 +246,7 @@ const Conversations = () => {
                 </p>
               </div>
               
-              {/* Action buttons aligned to the right */}
+              {/* Action buttons */}
               <div className="flex items-center gap-2">
                 <button className="px-4 py-2 border border-gray-300 rounded-md text-sm flex items-center text-gray-700 bg-white hover:bg-gray-50">
                   <Folder className="h-4 w-4 mr-2" />
@@ -279,10 +276,9 @@ const Conversations = () => {
               </div>
             </div>
             
-            {/* Search and filters in a card/box layout */}
+            {/* Search and filters  */}
             <div className="p-4 bg-gray-50">
               <div className="bg-white rounded-md border border-gray-200 overflow-hidden">
-                {/* Search and filters */}
                 <div className="p-4 flex items-center justify-between">
                   <div className="relative flex-1 max-w-md">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -302,7 +298,6 @@ const Conversations = () => {
                   </button>
                 </div>
 
-                {/* Table header - now with gray background */}
                 <div className="border-t border-gray-200 bg-gray-50">
                   <div className="grid grid-cols-12 py-3 px-6 text-sm font-medium text-gray-500">
                     <div className="col-span-1 flex items-center">
@@ -315,7 +310,6 @@ const Conversations = () => {
                   </div>
                 </div>
                 
-                {/* Empty state */}
                 <div className="flex flex-col items-center justify-center py-20 bg-white text-center">
                   <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
                     <FilePlus className="w-8 h-8 text-gray-400" />
@@ -385,9 +379,7 @@ const Conversations = () => {
                   </div>
                 </div>
                 
-                {/* Empty table - no content */}
                 <div className="flex-1">
-                  {/* Empty state is just blank space as shown in the screenshot */}
                 </div>
                 
                 {/* Pagination */}
@@ -409,7 +401,6 @@ const Conversations = () => {
             
             {activeTriggerLinksTab === 'Analyze' && (
               <div className="flex flex-col h-full">
-                {/* Header and description */}
                 <div className="p-6">
                   <h2 className="text-xl font-medium text-gray-800">Analyze</h2>
                   <p className="text-gray-600 text-sm mt-4">
@@ -417,7 +408,6 @@ const Conversations = () => {
                   </p>
                 </div>
                 
-                {/* Empty state with helper text */}
                 <div className="flex-1 flex items-center justify-center">
                   <div className="text-center">
                     <p className="text-gray-600">
