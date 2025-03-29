@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { MapPin, Search, ChevronDown, ChevronUp, Home, BarChart2, MessageSquare, Calendar, Users, Target, CreditCard, Mail, Settings, ChevronRight, ChevronLeft, X, LogOut, Plus } from 'lucide-react';
 import logo from '../assets/logo.png';
+import Dashboard from "./Dashboard";
+
 
 // Constants
+
 const mainNavItems = [
   { icon: <Home size={20} />, label: 'Launchpad' },
   { icon: <BarChart2 size={20} />, label: 'Dashboard' },
@@ -12,6 +15,7 @@ const mainNavItems = [
   { icon: <Target size={20} />, label: 'Opportunities' },
   { icon: <CreditCard size={20} />, label: 'Payments' },
 ];
+
 
 const secondaryNavItems = [
   { icon: <Mail size={20} />, label: 'Marketing' },
@@ -222,6 +226,7 @@ const Sidebar = () => {
   }, []);
 
   return (
+    
     <div className="flex h-screen relative">
       <button 
         onClick={toggleSidebar} 

@@ -3,12 +3,15 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './pages/sidebar';
 import './App.css';
 import Home from './pages/Home';
+import  Dashboard from './pages/Dashboard';
+import Test from './pages/Test';
+
 
 
 function App() {
   return (
     <Router>
-      <div className="flex">
+      
         {/* Sidebar */}
         <div className="sidebar">
           <Sidebar />
@@ -18,9 +21,13 @@ function App() {
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Home/>} />
+            <Route path="/dashboard" element={<Dashboard/>} />
+            <Route path="/test" element={<Test/>} />
+
+
           </Routes>
         </div>
-      </div>
+      
     </Router>
   );
 }
