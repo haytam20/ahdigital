@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { MapPin, Search, ChevronDown, ChevronUp, Home, BarChart2, MessageSquare, Calendar, Users, Target, CreditCard, Mail, Settings, ChevronRight, ChevronLeft, X, LogOut, Plus } from 'lucide-react';
 import logo from '../assets/logo.png';
+import { Link } from 'react-router-dom';
 
 // Constants
 const mainNavItems = [
@@ -37,26 +38,35 @@ const Logo = ({ isOpen }) => (
   </div>
 );
 
-const NavItem = React.memo(({ icon, label, isActive, onClick, isOpen }) => (
-  <div 
-    className={`group px-3 py-2 my-1 mx-2 flex items-center rounded-md cursor-pointer transition-all duration-200 ${
-      isActive 
-        ? 'bg-indigo-600 text-white' 
-        : 'hover:bg-gray-800 text-gray-300'
-    }`}
-    onClick={onClick}
-    role="button"
-    tabIndex={0}
-    aria-label={label}
-  >
-    <div className={isActive ? 'text-white' : 'text-gray-400 group-hover:text-gray-300'}>
-      {icon}
-    </div>
-    {isOpen && (
-      <span className={`ml-3 text-sm ${isActive ? 'font-medium' : ''}`}>{label}</span>
-    )}
-  </div>
-));
+
+
+const NavItem = React.memo(({ icon, label, isActive, onClick, isOpen }) => {
+  // Determine the path based on label
+  const path = label === 'Launchpad' ? '/' : `/${label.toLowerCase()}`;
+  
+  return (
+    <Link
+      to={path}
+      className={`group px-3 py-2 my-1 mx-2 flex items-center rounded-md cursor-pointer transition-all duration-200 ${
+        isActive 
+          ? 'bg-indigo-600 text-white' 
+          : 'hover:bg-gray-800 text-gray-300'
+      }`}
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      aria-label={label}
+    >
+      <div className={isActive ? 'text-white' : 'text-gray-400 group-hover:text-gray-300'}>
+        {icon}
+      </div>
+      {isOpen && (
+        <span className={`ml-3 text-sm ${isActive ? 'font-medium' : ''}`}>{label}</span>
+      )}
+    </Link>
+  );
+});
+
 
 const SearchBar = ({ searchQuery, setSearchQuery, searchFocused, setSearchFocused, clearSearch, isOpen }) => (
   <div className="px-4 py-3">
@@ -217,7 +227,7 @@ const Sidebar = () => {
     item.label.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleSelectAccount = useCallback((account) => {
+  const handleSelectAccount = useCallback(() => {
     setIsSubAccountsOpen(false);
   }, []);
 
