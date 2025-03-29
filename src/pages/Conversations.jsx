@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Search, Filter, Edit, ChevronDown, CheckCircle, Plus, Folder, FilePlus, Filter as FilterIcon, Trash, Copy } from 'lucide-react';
 
 const Conversations = () => {
@@ -10,6 +10,22 @@ const Conversations = () => {
   const [searchSnippets, setSearchSnippets] = useState('');
   const [activeTriggerLinksTab, setActiveTriggerLinksTab] = useState('Links');
   const [searchTriggerLink, setSearchTriggerLink] = useState('');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  
+  const dropdownRef = useRef(null);
+  
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
   
   const mainTabs = ['Conversations', 'Manual Actions', 'Snippets', 'Trigger Links'];
   const subTabs = ['Unread', 'Recents', 'Starred', 'All'];
@@ -48,18 +64,46 @@ const Conversations = () => {
       <div className="border-b border-gray-200 flex-shrink-0">
         <div className="flex">
           {mainTabs.map((tab) => (
-            <button 
-              key={tab}
-              className={`px-4 py-4 text-sm ${activeMainTab === tab 
-                ? 'text-blue-500 border-b-2 border-blue-500 font-medium' 
-                : 'text-gray-600'}`}
-              onClick={() => setActiveMainTab(tab)}
-            >
-              {tab}
-              {tab === 'Trigger Links' && (
-                <ChevronDown className="inline-block ml-1 w-4 h-4" />
+            <div key={tab} className="relative" ref={tab === 'Trigger Links' ? dropdownRef : null}>
+              <button 
+                className={`px-4 py-4 text-sm flex items-center ${activeMainTab === tab 
+                  ? 'text-blue-500 border-b-2 border-blue-500 font-medium' 
+                  : 'text-gray-600'}`}
+                onClick={() => {
+                  setActiveMainTab(tab);
+                  if (tab === 'Trigger Links') {
+                    setDropdownOpen(!dropdownOpen);
+                  }
+                }}
+              >
+                {tab}
+                {tab === 'Trigger Links' && (
+                  <ChevronDown className="inline-block ml-1 w-4 h-4" />
+                )}
+              </button>
+              
+              {/* Dropdown for Trigger Links */}
+              {tab === 'Trigger Links' && dropdownOpen && (
+                <div className="absolute z-10 left-0 mt-0 w-36 bg-white rounded-md shadow-lg overflow-hidden border border-gray-200">
+                  {triggerLinksTabs.map((linkTab) => (
+                    <button 
+                      key={linkTab}
+                      className={`w-full text-left px-4 py-3 text-sm hover:bg-gray-50 ${
+                        activeTriggerLinksTab === linkTab 
+                          ? 'text-blue-500' 
+                          : 'text-gray-700'
+                      }`}
+                      onClick={() => {
+                        setActiveTriggerLinksTab(linkTab);
+                        setDropdownOpen(false);
+                      }}
+                    >
+                      {linkTab}
+                    </button>
+                  ))}
+                </div>
               )}
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -220,18 +264,18 @@ const Conversations = () => {
             
             {/* Pagination */}
             <div className="flex justify-end p-4 border-t border-gray-200">
-                  <div className="flex items-center gap-2">
-                    <button className="px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-600 hover:bg-gray-50">
-                      Previous
-                    </button>
-                    <button className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-md text-sm text-gray-600 hover:bg-gray-50">
-                      1
-                    </button>
-                    <button className="px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-600 hover:bg-gray-50">
-                      Next
-                    </button>
-                  </div>
-                </div>
+              <div className="flex items-center gap-2">
+                <button className="px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-600 hover:bg-gray-50">
+                  Previous
+                </button>
+                <button className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-md text-sm text-gray-600 hover:bg-gray-50">
+                  1
+                </button>
+                <button className="px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-600 hover:bg-gray-50">
+                  Next
+                </button>
+              </div>
+            </div>
           </div>
         )}
         
@@ -323,26 +367,8 @@ const Conversations = () => {
         
         {activeMainTab === 'Trigger Links' && (
           <div className="w-full h-full bg-white flex flex-col">
-            {/* Trigger Links subtabs dropdown/menu */}
-            <div className="border-b border-gray-200">
-              <div className="flex">
-                {triggerLinksTabs.map((tab) => (
-                  <button 
-                    key={tab}
-                    className={`px-4 py-4 text-sm ${activeTriggerLinksTab === tab 
-                      ? 'text-blue-500 border-b-2 border-blue-500 font-medium' 
-                      : 'text-gray-600'}`}
-                    onClick={() => setActiveTriggerLinksTab(tab)}
-                  >
-                    {tab}
-                  </button>
-                ))}
-              </div>
-            </div>
-            
             {activeTriggerLinksTab === 'Links' && (
               <div className="flex flex-col h-full">
-                {/* Header and description */}
                 <div className="p-6">
                   <h2 className="text-xl font-medium text-gray-800">Link</h2>
                   <p className="text-gray-600 text-sm mt-4">
