@@ -15,11 +15,11 @@ const Store = () => {
       description: "Access your digital workspace with enhanced productivity tools and team collaboration features.",
       rating: 4.8,
       downloads: "50K+",
-      image: "/api/placeholder/120/120",
+      image: "/assets/logo.png",
       screenshots: [
-        "/api/placeholder/640/360",
-        "/api/placeholder/640/360",
-        "/api/placeholder/640/360"
+        "./assets/screenshot1",
+        "/assets/screenshot1",
+        "/assets/screenshot1"
       ],
       category: "Business",
       featured: true
@@ -30,7 +30,7 @@ const Store = () => {
       description: "Visualize your business data with powerful analytics and custom reporting dashboards.",
       rating: 4.6,
       downloads: "30K+",
-      image: "/api/placeholder/120/120",
+      image: "/assets/logo.png",
       screenshots: [
         "/api/placeholder/640/360",
         "/api/placeholder/640/360"
@@ -44,7 +44,7 @@ const Store = () => {
       description: "Seamlessly connect with your team through secure messaging and video conferencing.",
       rating: 4.7,
       downloads: "45K+",
-      image: "/api/placeholder/120/120",
+      image: "/assets/logo.png",
       screenshots: [
         "/api/placeholder/640/360",
         "/api/placeholder/640/360",
@@ -59,7 +59,7 @@ const Store = () => {
       description: "Manage your projects with an intuitive interface for task tracking and team coordination.",
       rating: 4.5,
       downloads: "25K+",
-      image: "/api/placeholder/120/120",
+      image: "/assets/logo.png",
       screenshots: [
         "/api/placeholder/640/360",
         "/api/placeholder/640/360"
@@ -175,7 +175,7 @@ const Store = () => {
                 {selectedApp.screenshots.map((screenshot, index) => (
                   <div key={index} className="rounded-lg overflow-hidden shadow-md">
                     <img 
-                      src={screenshot} 
+                      src={"/assets/image.png"} 
                       alt={`${selectedApp.name} screenshot ${index + 1}`} 
                       className="w-full h-24 object-cover"
                     />
@@ -312,7 +312,7 @@ const Store = () => {
               <div className="bg-blue-600 p-6 flex flex-col justify-center items-center text-white">
                 <div className="bg-white p-4 rounded-lg mb-4">
                   <img 
-                    src="/api/placeholder/80/80" 
+                    src="/assets/logo.png"
                     alt="AH-Digital" 
                     className="w-20 h-20 object-contain"
                   />
