@@ -1,7 +1,11 @@
 import { useState } from 'react';
-import { Search, Bell, User, ChevronRight, Settings, LogOut, Star, Download } from 'lucide-react';
+import { Search, Bell, User, ChevronRight, Settings, LogOut, Star, Download, Moon, Sun } from 'lucide-react';
+import { useDarkMode } from '../context/DarkModeContext';
 
-const Store = ({ darkMode }) => {
+const Store = () => {
+  const { theme, toggleTheme } = useDarkMode();
+  const darkMode = theme === 'dark';
+  
   const [selectedApp, setSelectedApp] = useState(null);
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
@@ -17,9 +21,9 @@ const Store = ({ darkMode }) => {
       downloads: "50K+",
       image: "/assets/logo.png",
       screenshots: [
-        "./assets/screenshot1",
-        "/assets/screenshot1",
-        "/assets/screenshot1"
+        "/assets/screenshot2.png",
+        "/assets/screenshot2.png",
+        "/assets/screenshot2.png"
       ],
       category: "Business",
       featured: true
@@ -32,8 +36,8 @@ const Store = ({ darkMode }) => {
       downloads: "30K+",
       image: "/assets/logo.png",
       screenshots: [
-        "/api/placeholder/640/360",
-        "/api/placeholder/640/360"
+        "/assets/screenshot1.png",
+        "/assets/screenshot2.png"
       ],
       category: "Analytics",
       featured: false
@@ -46,9 +50,9 @@ const Store = ({ darkMode }) => {
       downloads: "45K+",
       image: "/assets/logo.png",
       screenshots: [
-        "/api/placeholder/640/360",
-        "/api/placeholder/640/360",
-        "/api/placeholder/640/360"
+        "/assets/screenshot1.png",
+        "/assets/screenshot2.png",
+        "/assets/screenshot3.png"
       ],
       category: "Communication",
       featured: false
@@ -61,8 +65,8 @@ const Store = ({ darkMode }) => {
       downloads: "25K+",
       image: "/assets/logo.png",
       screenshots: [
-        "/api/placeholder/640/360",
-        "/api/placeholder/640/360"
+        "/assets/screenshot1.png",
+        "/assets/screenshot2.png"
       ],
       category: "Business",
       featured: false
@@ -123,7 +127,7 @@ const Store = ({ darkMode }) => {
               <User size={18} />
             </div>
             
-            {/* Profile*/}
+            {/* Profile */}
             {showProfileDropdown && (
               <div className={`absolute right-0 mt-2 w-48 ${bgColor} rounded-md shadow-lg py-1 z-10 border ${darkMode ? 'border-[#5F9EE9]/30' : 'border-gray-200'}`}>
                 <div className={`px-4 py-2 border-b ${darkMode ? 'border-[#5F9EE9]/30' : 'border-gray-200'}`}>
@@ -131,6 +135,17 @@ const Store = ({ darkMode }) => {
                   <p className={`text-xs ${secondaryTextColor}`}>amina003@gmail.com</p>
                 </div>
                 <div className="py-1">
+                  <button 
+                    className={`flex items-center px-4 py-2 text-sm ${textColor} hover:${darkMode ? 'bg-[#5F9EE9]/10' : 'bg-gray-100'} w-full text-left`}
+                    onClick={toggleTheme}
+                  >
+                    {darkMode ? (
+                      <Sun size={16} className={`mr-2 ${secondaryTextColor}`} />
+                    ) : (
+                      <Moon size={16} className={`mr-2 ${secondaryTextColor}`} />
+                    )}
+                    {darkMode ? 'Light Mode' : 'Dark Mode'}
+                  </button>
                   <button className={`flex items-center px-4 py-2 text-sm ${textColor} hover:${darkMode ? 'bg-[#5F9EE9]/10' : 'bg-gray-100'} w-full text-left`}>
                     <Settings size={16} className={`mr-2 ${secondaryTextColor}`} />
                     Settings
@@ -168,7 +183,7 @@ const Store = ({ darkMode }) => {
             <div className="md:col-span-2">
               <div className={`${darkMode ? 'bg-[#2A3142]/70' : 'bg-gray-100'} rounded-xl overflow-hidden shadow-md`}>
                 <img 
-                  src={selectedApp.screenshots[0]} 
+                  src={selectedApp.screenshots[0] || "/api/placeholder/640/360"} 
                   alt={`${selectedApp.name} screenshot`}
                   className="w-full object-cover"
                 />
@@ -178,7 +193,7 @@ const Store = ({ darkMode }) => {
                 {selectedApp.screenshots.map((screenshot, index) => (
                   <div key={index} className="rounded-lg overflow-hidden shadow-md">
                     <img 
-                      src={"/assets/image.png"} 
+                      src={screenshot || "/api/placeholder/640/360"} 
                       alt={`${selectedApp.name} screenshot ${index + 1}`} 
                       className="w-full h-24 object-cover"
                     />
